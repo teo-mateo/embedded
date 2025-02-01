@@ -1,0 +1,82 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile Project",
+            "type": "process",
+            "isBuildCommand": true,
+            "command": "${userHome}/.pico-sdk/ninja/v1.12.1/ninja",
+            "args": [
+                "-C",
+                "${workspaceFolder}/build"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": "$gcc",
+            "windows": {
+                "command": "${env:USERPROFILE}/.pico-sdk/ninja/v1.12.1/ninja.exe"
+            }
+        },
+        {
+            "label": "Run Project",
+            "type": "process",
+            "command": "${env:HOME}/.pico-sdk/picotool/2.1.0/picotool/picotool",
+            "args": [
+                "load",
+                "${command:raspberry-pi-pico.launchTargetPath}",
+                "-fx"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": [],
+            "windows": {
+                "command": "${env:USERPROFILE}/.pico-sdk/picotool/2.1.0/picotool/picotool.exe"
+            }
+        },
+        {
+            "label": "Reboot in BOOTSEL mode",
+            "type": "process",
+            "command": "${env:HOME}/.pico-sdk/picotool/2.0.0/picotool/picotool",
+            "args": [
+                "reboot",
+                "-f",
+                "-u"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": [],
+            "windows": {
+                "command": "${env:USERPROFILE}/.pico-sdk/picotool/2.0.0/picotool/picotool.exe"
+            }
+        },
+        {
+            "label": "Compile and Run",
+            "type": "process",
+            "command": "${env:HOME}/.pico-sdk/picotool/2.1.0/picotool/picotool",
+            "args": [
+                "load",
+                "${command:raspberry-pi-pico.launchTargetPath}",
+                "-fx"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            },
+            "problemMatcher": [],
+            "windows": {
+                "command": "${env:USERPROFILE}/.pico-sdk/picotool/2.1.0/picotool/picotool.exe"
+            },
+            "dependsOn": [
+                "Compile Project",
+                "Reboot in BOOTSEL mode"
+            ]
+        }
+    ]
+}
